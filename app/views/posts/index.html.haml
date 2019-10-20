@@ -1,0 +1,15 @@
+.posts_wrapper
+    - @posts.each do |post|
+        .post    
+            %h2
+                = link_to post.title, post_path(post)
+            %p
+                = post.content
+        
+            - if user_signed_in? && current_user == post.user 
+                = post.user.id
+                = link_to "Edit", edit_post_path(post)
+
+
+
+//= image_tag current_user.avatar.url

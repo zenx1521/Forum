@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %title Forum
+    = csrf_meta_tags 
+    = csp_meta_tag 
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' 
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+
+    %ul
+      - if !user_signed_in?
+        %li 
+          = link_to "Register", new_user_registration_path 
+        %li 
+          = link_to "Log In", new_user_session_path
+      - else 
+        %li   
+          = link_to "Log Out", destroy_user_session_path, method: :delete
+        %li
+          = link_to "Edit User", edit_user_registration_path
+        %li
+          = link_to "User Profile", user_path(current_user)
+    
+
+
+
+    %p.notice
+      = notice
+    %p.alert
+      = alert 
+    .wrapper
+      = yield 
