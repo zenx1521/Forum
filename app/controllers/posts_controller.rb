@@ -8,10 +8,12 @@ class PostsController < ApplicationController
 
     def new
         @post = current_user.posts.new
+        #@post = Post.new
     end
 
     def create
         @post = current_user.posts.new(post_params)
+
         if @post.save
             redirect_to @post 
         else
@@ -28,6 +30,7 @@ class PostsController < ApplicationController
     end 
 
     def update
+
         if @post.update_attributes(post_params)
             redirect_to @post
         else 
