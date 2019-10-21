@@ -2,9 +2,11 @@ require 'rails_helper'
 
 describe PostsController do
     login_user
+    #
+
     describe "GET #index" do
         it "populates an array of posts" do
-            post = FactoryBot.create(:post)
+            post = FactoryBot.create(:post, :user => @user)
             get :index
             expect(assigns(:posts)).to eq([post])
         end
@@ -17,13 +19,14 @@ describe PostsController do
 
     describe "GET #show" do
         it "assigns the requested post to @post" do
-            post = FactoryBot.create(:post)
+            post = FactoryBot.create(:post, :user => @user)
             get :show, params: {id: post }
             expect(assigns(:post)).to eq(post)
         end
 
         it "renders #show view" do
-            get :show, params: {id: FactoryBot.create(:post)}
+            post = FactoryBot.create(:post, :user => @user)
+            get :show, params: {id: @user}
             expect(response).to render_template :show
         end 
     end
@@ -53,7 +56,7 @@ describe PostsController do
 
     describe "PUT update" do
         before :each do
-            @post = FactoryBot.create(:post,title: "Tytul",content: "Kontent")
+            @post = FactoryBot.create(:post,title: "Tytul",content: "Kontent",:user => @user)
         end 
 
         context "valid attributes" do
@@ -95,7 +98,7 @@ describe PostsController do
 
     describe "Delete #destroy" do
         before :each do
-            @post = FactoryBot.create(:post)
+            @post = FactoryBot.create(:post, :user => @user)
         end 
 
         it "deleete the contact" do 
