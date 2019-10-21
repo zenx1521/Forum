@@ -1,5 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require_relative 'support/controller_macros'
 
 ENV['RAILS_ENV'] ||= 'test'
 
@@ -68,19 +69,12 @@ RSpec.configure do |config|
 
   config.include Devise::Test::ControllerHelpers, :type => :controller 
   config.include Warden::Test::Helpers
+  config.extend ControllerMacros, :type => :controller
 
 
-  config.before(:suite) do
-    DatabaseCleaner[:active_record].strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
 
-  config.before(:each) do
-    DatabaseCleaner.start
-  end 
-
-  config.after(:each) do 
-    DatabaseCleaner.clean 
+  config.after(:all) do 
+    DatabaseCleaner.clean_with(:truncation) 
   end 
 
 
