@@ -8,6 +8,7 @@ gem 'rails', '~> 6.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 gem 'simple_form'
+gem 'database_cleaner'
 gem 'haml'
 gem 'factory_bot_rails'
 gem 'faker'

@@ -29,7 +29,7 @@ describe PostsController do
     
     describe "GET #new" do
         it "assigns a title and content to the new post" do
-            sign_in User.find(5)    
+            sign_in FactoryBot.create(:user)   
             get :new
             expect(assigns(:post)).to be_a_new(Post)
         end
@@ -38,7 +38,7 @@ describe PostsController do
     describe "POST #create" do 
         context "with valid attributes" do
             it "creates a new contact" do
-                sign_in User.find(5)
+                sign_in FactoryBot.create(:user)
                 params = FactoryBot.attributes_for(:post)
                 puts params
                 #assigns({post :create, :post => post_params}).should change(Post, :count).by(1)
@@ -46,7 +46,7 @@ describe PostsController do
             end
 
             it "redirects to the new contact" do
-                sign_in User.find(5)
+                sign_in FactoryBot.create(:user)
                 post :create, params: {post: FactoryBot.attributes_for(:post)}
                 expect(response).to redirect_to Post.last
             end
@@ -65,7 +65,7 @@ describe PostsController do
             end 
 
             it "changes @post's attributes" do
-                sign_in User.find(5)
+                sign_in FactoryBot.create(:user)
                 put :update, params:{id: @post, post: FactoryBot.attributes_for(:post,title: "Tytul2",content:"Kontent2")}
                 @post.reload
                 expect(@post.title).to eq("Tytul2")
@@ -89,7 +89,7 @@ describe PostsController do
             end 
 
             it "re-renders the edit method" do
-                sign_in User.find(5)
+                sign_in FactoryBot.create(:user)
                 put :update, params: {id:@post, post: FactoryBot.attributes_for(:invalid_post)}
                 expect(response).to render_template :edit
             end
