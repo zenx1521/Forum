@@ -16,7 +16,7 @@ gem 'rspec-rails','~> 4.0.0.beta2', :group => [:development,:test]
 gem 'rails-controller-testing'
 gem 'carrierwave'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.3'
 gem 'devise'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5'
